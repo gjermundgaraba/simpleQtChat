@@ -27,9 +27,14 @@ void Server::acceptConnection()
 void Server::startRead()
 {
     QString *msg;
+    QString *sender;
+
     char buffer[1024] = {0};
     client->read(buffer, client->bytesAvailable());
+
     msg = new QString(buffer);
-    window->displayNewMessage(msg);
+    sender = new QString(client->peerAddress().toString());
+
+    window->displayNewMessage(msg, sender);
     client->close();
 }

@@ -16,7 +16,7 @@ public:
     MainWindow();
     ~MainWindow();
 
-    void displayNewMessage(QString*);
+    void displayNewMessage(QString*, QString*);
 private slots:
     void sendMessage();
 private:

@@ -44,11 +44,12 @@ void MainWindow::sendMessage()
         delete socket;
         socket = new Client(message);
         socket->start(address, port);
+        chatBox->append("Me: " + message);
     }
 }
 
-void MainWindow::displayNewMessage(QString* message) {
-    QString msg("<b>Anon:</b> ");
+void MainWindow::displayNewMessage(QString* message, QString* sender) {
+    QString msg("<b>" + *sender + "</b> ");
     msg.append(message);
     chatBox->append(msg);
 }

@@ -6,10 +6,13 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
     QInputDialog options;
     options.setLabelText("Enter port for listening:");
+    options.setTextValue("12349");
     options.exec();
     quint16 port = options.textValue().toShort();
+
     MainWindow w;
     Server server(&w, port);
     w.show();

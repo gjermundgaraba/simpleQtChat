@@ -18,10 +18,10 @@ MainWindow::MainWindow()
     submitButton = new QPushButton("Send...");
     connect(submitButton, SIGNAL(clicked()),
             this, SLOT(sendMessage()));
-    ipField = new QLineEdit("IP Address");
-    portField = new QLineEdit("Port number");
+    ipField = new QLineEdit("127.0.0.1");
+    portField = new QLineEdit("12349");
 
-    setWindowTitle("Qt Peer-To-Peer Chat");
+    setWindowTitle("simpleQtChat");
 
     testLayout->addWidget(ipField);
     testLayout->addWidget(portField);
@@ -39,17 +39,19 @@ void MainWindow::sendMessage()
     QString address(ipField->text());
     quint16 port = portField->text().toShort();
     QString message(input->text());
-    if (socket == NULL || !socket->isOpen())
+
+    if (socket != NULL)
     {
         delete socket;
-        socket = new Client(message);
-        socket->start(address, port);
-        chatBox->append("Me: " + message);
     }
+
+    socket = new Client(message);
+    socket->start(address, port);
+    chatBox->append("Me: " + message);
 }
 
 void MainWindow::displayNewMessage(QString* message, QString* sender) {
-    QString msg("<b>" + *sender + "</b> ");
+    QString msg("<b>" + *sender + ":</b> ");
     msg.append(message);
     chatBox->append(msg);
 }

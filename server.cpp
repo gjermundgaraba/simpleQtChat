@@ -10,6 +10,7 @@ Server::Server(MainWindow *win, quint16 port, QObject *parent): QObject(parent)
     this, SLOT(acceptConnection()));
 
     server.listen(QHostAddress::Any, port);
+    std::cout << "Listen on port: " << port << std::endl;
 }
 
 Server::~Server()
@@ -26,6 +27,7 @@ void Server::acceptConnection()
 
 void Server::startRead()
 {
+    std::cout << "Starting reading..." << std::endl;
     QString *msg;
     QString *sender;
 

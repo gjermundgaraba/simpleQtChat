@@ -1,11 +1,11 @@
 #include <QString>
 #include "server.h"
 #include <iostream>
+
 using namespace std;
 
-Server::Server(MainWindow *win, quint16 port, QObject *parent): QObject(parent)
+Server::Server(quint16 port, QObject *parent): QObject(parent)
 {
-    window = win;
     connect(&server, SIGNAL(newConnection()),
     this, SLOT(acceptConnection()));
 
@@ -28,15 +28,14 @@ void Server::acceptConnection()
 void Server::startRead()
 {
     std::cout << "Starting reading..." << std::endl;
-    QString *msg;
-    QString *sender;
 
     char buffer[1024] = {0};
     client->read(buffer, client->bytesAvailable());
 
-    msg = new QString(buffer);
-    sender = new QString(client->peerAddress().toString());
+    QString msg(buffer);
+    QString sender(client->peerAddress().toString());
 
-    window->displayNewMessage(msg, sender);
+    emit messageRecieved(msg, sender);
+
     client->close();
 }

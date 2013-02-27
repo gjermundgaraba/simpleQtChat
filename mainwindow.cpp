@@ -50,8 +50,8 @@ void MainWindow::sendMessage()
     chatBox->append("Me: " + message);
 }
 
-void MainWindow::displayNewMessage(QString* message, QString* sender) {
-    QString msg("<b>" + *sender + ":</b> ");
+void MainWindow::displayNewMessage(QString message, QString sender) {
+    QString msg("<b>" + sender + ":</b> ");
     msg.append(message);
     chatBox->append(msg);
 }

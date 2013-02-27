@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include "server.h"
 
 class QTextEdit;
 class QString;
@@ -15,10 +16,10 @@ class MainWindow : public QWidget
 public:
     MainWindow();
     ~MainWindow();
-
-    void displayNewMessage(QString*, QString*);
+    //void setServer(Server*);
 private slots:
     void sendMessage();
+    void displayNewMessage(QString, QString);
 private:
     QTextEdit *chatBox;
     QLineEdit *input;
@@ -28,6 +29,7 @@ private:
     QLineEdit *portField;
 
     Client *socket;
+    Server *server;
 };
 
 #endif // MAINWINDOW_H

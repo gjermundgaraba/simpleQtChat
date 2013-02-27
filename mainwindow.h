@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
-#include "server.h"
 
 class QTextEdit;
 class QString;
@@ -29,7 +28,6 @@ private:
     QLineEdit *portField;
 
     Client *socket;
-    Server *server;
 };
 
 #endif // MAINWINDOW_H

@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
 #include <QWidget>
 
 class QTextEdit;
@@ -15,19 +16,22 @@ class MainWindow : public QWidget
 public:
     MainWindow();
     ~MainWindow();
-    //void setServer(Server*);
+signals:
+    void sendMessage(QString message);
+    void connectToChanged(QString address, QString port);
 private slots:
     void sendMessage();
-    void displayNewMessage(QString, QString);
+    void displayNewMessage(QString message, QString sender);
+    void connectionChange();
 private:
     QTextEdit *chatBox;
     QLineEdit *input;
     QPushButton *submitButton;
 
+    // This will be better later, for now its just easier this way:
     QLineEdit *ipField;
     QLineEdit *portField;
-
-    Client *socket;
 };
+
 
 #endif // MAINWINDOW_H

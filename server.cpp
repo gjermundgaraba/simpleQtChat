@@ -2,15 +2,13 @@
 #include "server.h"
 #include <iostream>
 
-using namespace std;
-
-Server::Server(quint16 port, QObject *parent): QObject(parent)
+Server::Server(QString port, QObject *parent): QObject(parent)
 {
     connect(&server, SIGNAL(newConnection()),
     this, SLOT(acceptConnection()));
 
-    server.listen(QHostAddress::Any, port);
-    std::cout << "Listen on port: " << port << std::endl;
+    server.listen(QHostAddress::Any, port.toShort());
+    std::cout << "Listen on port: " << port.toStdString() << std::endl;
 }
 
 Server::~Server()
@@ -37,5 +35,5 @@ void Server::startRead()
 
     emit messageRecieved(msg, sender);
 
-    client->close();
+    //client->close();
 }

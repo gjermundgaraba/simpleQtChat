@@ -1,6 +1,7 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+
 #include <QtNetwork>
 #include <QObject>
 #include <QTcpServer>
@@ -10,7 +11,7 @@ class Server: public QObject
 {
 Q_OBJECT
 public:
-      Server(quint16 port, QObject * parent = 0);
+      Server(QString port, QObject * parent = 0);
       ~Server();
 public slots:
       void acceptConnection();
@@ -21,5 +22,6 @@ private:
       QTcpServer server;
       QTcpSocket *client;
 };
+
 
 #endif

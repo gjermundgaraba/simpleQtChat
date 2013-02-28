@@ -6,35 +6,28 @@
 
 #include "client.h"
 
-Client::Client(QString msg, QObject* parent): QObject(parent)
+Client::Client(QObject* parent): QObject(parent)
 {
-    message = msg;
-    connect(&socket, SIGNAL(connected()),
-        this, SLOT(startTransfer()));
 }
 
 Client::~Client()
 {
 }
 
-void Client::start(QString address, quint16 port)
+void Client::connectTo(QString address, QString port)
 {
+    if (socket.isOpen()) socket.close();
     std::cout << "Connceting to " << address.toStdString() << std::endl;
     QHostAddress addr(address);
-    socket.connectToHost(addr, port);
+    socket.connectToHost(addr, port.toShort());
 }
 
-bool Client::isOpen()
+void Client::startTransfer(QString message)
 {
-    return socket.isOpen();
-}
-
-void Client::startTransfer()
-{
+    if (!socket.isValid()) std::cout << "WE HAS PROBLEM, NO CONNECTION!" << std::endl;
     std::cout << "Starting transfer..." << std::endl;
     QByteArray messageArray;
     messageArray.append(message);
 
     socket.write(messageArray);
-    socket.close();
 }

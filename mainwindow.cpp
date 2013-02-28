@@ -13,6 +13,7 @@ MainWindow::MainWindow()
     chatBox->setReadOnly(true);
 
     input = new QLineEdit();
+    connect(input, SIGNAL(returnPressed()), this, SLOT(sendMessage()));
 
     submitButton = new QPushButton("Send...");
     connect(submitButton, SIGNAL(clicked()),
